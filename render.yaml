@@ -1,0 +1,15 @@
+# Render Blueprint - deploy 1 click cho YT NICHE HUNTER
+# Cach dung: day thu muc nay len GitHub -> Render Dashboard -> New -> Blueprint -> chon repo
+services:
+  - type: web
+    name: yt-niche-hunter
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn yt_niche_hunter:app --bind 0.0.0.0:$PORT --workers 1 --threads 8 --timeout 120
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      # (tuy chon) dat API key YouTube o day de khoi nhap lai sau moi lan deploy:
+      # - key: YT_API_KEY
+      #   sync: false
